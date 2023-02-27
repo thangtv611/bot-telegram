@@ -14,7 +14,7 @@ class BotTelegram {
     }
 
     buildMessage(msg, level) {
-        return `${level} <pre>${msg}</pre>`;
+        return this.decor ? `${level} <pre>${msg}</pre>` : `${level}\n ${msg}`;
     }
 
     async sendMessage(msg) {
@@ -32,17 +32,17 @@ class BotTelegram {
     }
 
     async warning(msg) {
-        const message = this.buildMessage(msg, '🟡️');
+        const message = this.buildMessage(msg, '⚠️⚠️⚠️⚠️⚠️');
         await this.sendMessage(message);
     }
 
     async alert(msg) {
-        const message = this.buildMessage(msg, '🔴');
+        const message = this.buildMessage(msg, '🔥🔥🔥🔥🔥');
         await this.sendMessage(message);
     }
 
     async info(msg) {
-        const message = this.buildMessage(msg, '🟢');
+        const message = this.buildMessage(msg, '😀😀😀😀😀');
         await this.sendMessage(message);
     }
 }

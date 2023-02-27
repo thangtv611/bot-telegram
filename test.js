@@ -5,7 +5,7 @@ const bot = new BotTelegram(
     process.env.BOT_TOKEN,
     process.env.CHANNEL_ID,
     "my-service",
-    true,
+    false,
 );
 
 (async () => {

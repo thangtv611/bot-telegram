@@ -6,15 +6,13 @@ const bot = new BotTelegram(
     process.env.CHANNEL_ID,
     "my-service",
     false,
+    false,
 );
 
 (async () => {
     await bot.info(
-        "aaaaa"
+        "Just a test"
         , [
-            'https://twitter.com/elonmusk/status/1630285709654343683',
-            'https://twitter.com/elonmusk/status/1630285709654343683',
-            'https://twitter.com/elonmusk/status/1630285709654343683',
             'https://twitter.com/elonmusk/status/1630285709654343683',
         ]
     );

@@ -7,15 +7,20 @@ class BotTelegram {
     prefix;
     decor;
 
-    constructor(botId, channelId, serviceName, decor = true) {
+    constructor(botId, channelId, serviceName, decor = true, useEmoji = false) {
         this.prefix = serviceName;
         this.botId = botId;
         this.channels = [ channelId ];
         this.decor = decor;
+        this.useEmoji = useEmoji;
     }
 
     buildMessage(msg, level, urls) {
-        const _msg = this.decor ? `${level} <pre>${msg}</pre>` : `${level}\n ${msg}`;
+        let _msg = this.decor ? `<pre>${msg}</pre>` : `${msg}`;
+
+        if (this.useEmoji) {
+            _msg += level + _msg;
+        }
 
         if (!urls || !urls.length) {
             return _msg;

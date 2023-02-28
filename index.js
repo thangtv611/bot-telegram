@@ -1,4 +1,5 @@
 const axios = require("axios");
+const url = require("url");
 
 class BotTelegram {
     botId;
@@ -13,8 +14,19 @@ class BotTelegram {
         this.decor = decor;
     }
 
-    buildMessage(msg, level) {
-        return this.decor ? `${level} <pre>${msg}</pre>` : `${level}\n ${msg}`;
+    buildMessage(msg, level, urls) {
+        const _msg = this.decor ? `${level} <pre>${msg}</pre>` : `${level}\n ${msg}`;
+
+        if (!urls || !urls.length) {
+            return _msg;
+        }
+
+        let links = `\n\nLinks:\n`;
+        urls.forEach(url => {
+            links += `<a href="${url}">${url}</a>`
+        });
+
+        return `${_msg}\n${links}`
     }
 
     async sendMessage(msg) {
@@ -31,18 +43,18 @@ class BotTelegram {
         }
     }
 
-    async warning(msg) {
-        const message = this.buildMessage(msg, '⚠️⚠️⚠️⚠️⚠️');
+    async warning(msg, urls) {
+        const message = this.buildMessage(msg, '⚠️⚠️⚠️⚠️⚠️', urls);
         await this.sendMessage(message);
     }
 
-    async alert(msg) {
-        const message = this.buildMessage(msg, '🔥🔥🔥🔥🔥');
+    async alert(msg, urls) {
+        const message = this.buildMessage(msg, '🔥🔥🔥🔥🔥', urls);
         await this.sendMessage(message);
     }
 
-    async info(msg) {
-        const message = this.buildMessage(msg, '😀😀😀😀😀');
+    async info(msg, urls) {
+        const message = this.buildMessage(msg, '😀😀😀😀😀', urls);
         await this.sendMessage(message);
     }
 }
